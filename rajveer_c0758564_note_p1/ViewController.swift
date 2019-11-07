@@ -35,10 +35,7 @@
 //               cell.textLabel?.text = folderName
 //             cell.imageView?.image = UIImage(named: folderName)
 //              return cell
-////                guard arrayfolders != nil && unHealthyFoods != nil else {return UITableViewCell()}
-////                let cell = UITableViewCell(style: .value1, reuseIdentifier: "")
-////                let folderName = (indexPath.section == 0) ? healthyFoods![indexPath.row] : unHealthyFoods![indexPath.row]
-//                cell.textLabel?.text = folderName
+////                               cell.textLabel?.text = folderName
 //                cell.imageView?.image = UIImage(named: folderName)
 //                cell.detailTextLabel?.text = "Row \(indexPath.row)"
 //                return cell

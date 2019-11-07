@@ -13,8 +13,13 @@ class NewFolderTableViewController: UITableViewController {
 //    @IBOutlet weak var folderlabel: UILabel!
     
 //    @IBOutlet weak var FolderIconImage: UIImageView!
-    
+    var fieldOfText:UITextField?
+    var imageView : UIImage?
     var array_folder : [String]?
+    
+    
+    @IBOutlet var tableViewData: UITableView!
+    
     @IBAction func NewFolderButton(_ sender: UIBarButtonItem) {
     
     
@@ -25,7 +30,13 @@ class NewFolderTableViewController: UITableViewController {
                }
                
                       let okAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-               let AddItemAction = UIAlertAction(title:"Add Item" , style: .default)
+//               let AddItemAction = UIAlertAction(title:"Add Item" , style: .default)
+        let AddItemAction = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            let txtField = alertcontroller.textFields![0]
+            self.array_folder!.append(txtField.text!)
+            print(self.array_folder!)
+            self.tableViewData.reloadData()
+        }
                       
                       alertcontroller.addAction(okAction)
                alertcontroller.addAction(AddItemAction); self.present(alertcontroller, animated: true, completion: nil)
@@ -54,55 +65,61 @@ class NewFolderTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return array_folder?.count ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         // Configure the cell...
-        var new = array_folder![indexPath.row]
-      let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath){
 
+//           guard array_folder != nil else { return UITableViewCell() }
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "id"){
+                let folderName = array_folder![indexPath.row]
+               cell.textLabel?.text = folderName
+        cell.imageView?.image = UIImage(named: "folder-icon")
+               return cell
+                                 
         }
-        return cell
+        return UITableViewCell()
     }
 
 
-   
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-   
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+//
+//    // Override to support conditional editing of the table view.
+//func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        // Return false if you do not want the specified item to be editable.
+//        return true
+//    }
+//
+//
+//
+//    // Override to support editing the table view.
+//func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        } else if editingStyle == .insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }
+//    }
+//
+//
+//
+//    // Override to support rearranging the table view.
+//func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+//
+//    }
+//
+//
+//
+//    // Override to support conditional rearranging of the table view.
+//func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        // Return false if you do not want the item to be re-orderable.
+//        return true
+//    }
+//
 
     /*
     // MARK: - Navigation
