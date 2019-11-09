@@ -106,7 +106,13 @@ class NewFolderTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-//
+// removing delete in edit option
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return tableViewData.isEditing ? .none : .delete
+    }
 //
 //
 //    // Override to support rearranging the table view.
