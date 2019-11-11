@@ -51,7 +51,7 @@
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="hjh-EK-Ety"/>
                         <barButtonItem title="New Folder" id="9sI-qv-m3f">
-                            <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="NewFolderButton:" destination="kLM-Tb-Cdn" id="9pS-1F-Nxj"/>
                             </connections>

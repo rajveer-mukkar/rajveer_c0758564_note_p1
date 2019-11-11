@@ -34,6 +34,7 @@ class NewFolderTableViewController: UITableViewController {
     let AddItemAction = UIAlertAction(title: "Add Item", style: .default)
     { (action) in
             let txtField = alertcontroller.textFields![0]
+       
             self.array_folder!.append(txtField.text!)
             print(self.array_folder!)
             self.tableViewData.reloadData()
@@ -87,18 +88,7 @@ class NewFolderTableViewController: UITableViewController {
         }
         return UITableViewCell()
     }
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let Header_View = UIView.init(frame: CGRect.init(x : 0 , y :0 , width: tableView.frame.width, height: 60))
-//        let label = UILabel()
-//        label.frame = CGRect.init(x:5 , y:5 , width: Header_View.frame.width-10, height: Header_View.frame.height-10)
-//        label.text = "Folders"
-//        label.textColor = UIColor.black
-//        Header_View.addSubview(label)
-//        return Header_View
-//    }
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 60
-//    }
+
 
 
 //
