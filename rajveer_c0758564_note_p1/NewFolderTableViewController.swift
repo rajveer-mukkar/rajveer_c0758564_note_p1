@@ -34,11 +34,21 @@ class NewFolderTableViewController: UITableViewController {
     let AddItemAction = UIAlertAction(title: "Add Item", style: .default)
     { (action) in
             let txtField = alertcontroller.textFields![0]
-       
+        
+
+        if self.array_folder!.contains(txtField.text!){
+                let alertcontrolleragain = UIAlertController (title: "Name Taken", message: "Choose a Different File", preferredStyle: .alert)
+                let okAction2 = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                alertcontrolleragain.addAction(okAction2)
+                self.present(alertcontrolleragain , animated: true , completion: nil)
+                
+        } else {
             self.array_folder!.append(txtField.text!)
-            print(self.array_folder!)
+            
+        }
+
             self.tableViewData.reloadData()
-//      AddItemAction.setValue(UIColor.black , forKey : "titleTextColor")
+
         }
                      AddItemAction.setValue(UIColor.black , forKey : "titleTextColor")
                       alertcontroller.addAction(okAction)
