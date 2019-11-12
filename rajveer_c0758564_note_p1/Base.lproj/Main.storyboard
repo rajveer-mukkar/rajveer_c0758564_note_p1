@@ -58,8 +58,8 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="hjh-EK-Ety"/>
-                        <barButtonItem title="New Folder" id="9sI-qv-m3f">
-                            <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem title="New Folder" image="folder.badge.plus" catalog="system" id="9sI-qv-m3f">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="NewFolderButton:" destination="kLM-Tb-Cdn" id="9pS-1F-Nxj"/>
                             </connections>
@@ -79,22 +79,31 @@
         <scene sceneID="MC8-MV-T6n">
             <objects>
                 <tableViewController id="19l-Ni-bAT" customClass="FoldersPageTableViewController" customModule="rajveer_c0758564_note_p1" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RAT-tl-8mu">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RAT-tl-8mu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="aK9-Rb-ySp">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="mynote" id="aK9-Rb-ySp">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aK9-Rb-ySp" id="NHU-gD-5MA">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="370" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Fx-i5-wqD">
+                                            <rect key="frame" x="20" y="0.0" width="258" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <segue destination="4eC-QF-cHQ" kind="show" id="WvJ-WT-H2U"/>
-                                    <segue destination="4eC-QF-cHQ" kind="show" trigger="accessoryAction" id="BsU-lH-SA0"/>
+                                    <segue destination="4eC-QF-cHQ" kind="show" trigger="accessoryAction" id="ql9-Sv-Wk9"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -104,14 +113,14 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Item" image="trash" catalog="system" id="WzP-5U-JUv">
+                        <barButtonItem title="Item" image="trash" catalog="system" largeContentSizeImage="trash" id="WzP-5U-JUv">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem title="Item" image="tray.and.arrow.down" catalog="system" id="Jbe-ji-4pJ">
+                        <barButtonItem title="Item" image="tray.and.arrow.down" catalog="system" largeContentSizeImage="tray.and.arrow.down" id="Jbe-ji-4pJ">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ABN-ae-82n"/>
-                        <barButtonItem title="Item" image="pencil.and.ellipsis.rectangle" catalog="system" id="XLT-Zr-tjB">
+                        <barButtonItem title="Item" image="pencil.and.ellipsis.rectangle" catalog="system" largeContentSizeImage="pencil.and.ellipsis.rectangle" id="XLT-Zr-tjB">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="4eC-QF-cHQ" kind="show" id="lMl-MF-i3T"/>
@@ -127,7 +136,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TB2-6e-9fx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="472" y="330"/>
+            <point key="canvasLocation" x="471.01449275362324" y="329.46428571428572"/>
         </scene>
         <!--Show Notes View Controller-->
         <scene sceneID="WBz-Be-5bc">
@@ -188,12 +197,13 @@
     </scenes>
     <resources>
         <image name="ellipsis" catalog="system" width="64" height="20"/>
+        <image name="folder.badge.plus" catalog="system" width="64" height="44"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
         <image name="trash" catalog="system" width="60" height="64"/>
         <image name="tray.and.arrow.down" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WvJ-WT-H2U"/>
+        <segue reference="lMl-MF-i3T"/>
         <segue reference="2fT-YA-ytJ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

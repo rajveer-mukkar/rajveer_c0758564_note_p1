@@ -17,7 +17,7 @@ class NewFolderTableViewController: UITableViewController {
     var imageView : UIImage?
     var array_folder : [String]?
     
-    
+   
     @IBOutlet var tableViewData: UITableView!
     
     @IBAction func NewFolderButton(_ sender: UIBarButtonItem) {
@@ -150,12 +150,27 @@ class NewFolderTableViewController: UITableViewController {
         array_folder?.insert(item!, at: destinationIndexPath.row)
     }
 //
-
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let Cell = tableView.cellForRow(at: indexPath)
+//        let checkCell = array_folder![indexPath.row]
+//        Cell?.accessoryType = UITableViewCell.AccessoryType.checkmark
+//
+//    }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let detailView = segue.destination as? showNotesViewController {
+//                   if let tableViewcell = sender as? UITableViewCell {
+//                       detailView.array_folder = self
+//                       if let Index = tableView.indexPath(for: tableViewcell)?.row {
+//                           detailView.textString = tasks![Index]
+//                           curIndex = Index
+//                       }
+//                   }
+//               }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 class showNotesViewController: UIViewController {
-
+    var array : [String]?
     
     @IBOutlet weak var textview: UITextView!
    
@@ -21,23 +21,14 @@ class showNotesViewController: UIViewController {
             textview.text = textString ?? ""
             // Do any additional setup after loading the view.
         }
-        
+
         override func viewWillDisappear(_ animated: Bool) {
-            
-            taskTable?.updateText(text: textview.text)
-//
-        /*
-        // MARK: - Navigation
 
-        // In a storyboard-based application, you will often want to do a little preparation before navigation
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            // Get the new view controller using segue.destination.
-            // Pass the selected object to the new view controller.
-        }
-        */
+                       taskTable?.updateText(text: textview.text)
+
 
     }
-    }
+}
 
     
     
