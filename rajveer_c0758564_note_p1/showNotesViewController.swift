@@ -11,6 +11,8 @@ import UIKit
 class showNotesViewController: UIViewController {
     var array : [String]?
     
+   
+    
     @IBOutlet weak var textview: UITextView!
    
         var textString : String?

@@ -11,6 +11,12 @@ import UIKit
 class FoldersPageTableViewController: UITableViewController {
 var array : [String]?
     var cur_Index = -1
+    
+    
+    @IBOutlet weak var delete_bar_button: UIBarButtonItem!
+    
+    @IBOutlet weak var move_bar_button: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,7 +60,37 @@ array = []
     return UITableViewCell()
 }
     
+    @IBAction func deletebtn(_ sender: Any) {
+       let AlertController = UIAlertController(title: "Delete", message: "Are you sure?", preferredStyle: .alert)
+        let okAction2 = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+               okAction2.setValue(UIColor.brown, forKey: "titleTextColor")
+        let deleteitemaction = UIAlertAction(title: "Delete", style: .default)
+        { (action) in
+            if let rows_Selected = self.tableView.indexPathsForSelectedRows {
+                var item = [String]()
+                for index_path in rows_Selected {
+                    item.append(self.array![index_path.row])
+                }
+                for k in item {
+                    if let random_item = self.array!.firstIndex(of: k) {
+                        self.array!.remove(at: random_item)
+                    }
+                }
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: rows_Selected, with: .automatic)
+                self.tableView.endUpdates()
+            }
+          
+        }
+//       AlertController.setValue(UIColor.black , forKey : "titleTextColor")
+        deleteitemaction.setValue(UIColor.black, forKey: "titleTextColor")
+                   AlertController.addAction(okAction2)
+       AlertController.addAction(deleteitemaction); self.present(AlertController, animated: true, completion: nil)
+        
     
+
+    
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         

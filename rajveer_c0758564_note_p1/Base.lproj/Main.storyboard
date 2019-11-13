@@ -115,6 +115,9 @@
                     <toolbarItems>
                         <barButtonItem title="Item" image="trash" catalog="system" largeContentSizeImage="trash" id="WzP-5U-JUv">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="deletebtn:" destination="19l-Ni-bAT" id="OFT-Un-nmc"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem title="Item" image="tray.and.arrow.down" catalog="system" largeContentSizeImage="tray.and.arrow.down" id="Jbe-ji-4pJ">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -133,6 +136,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="delete_bar_button" destination="WzP-5U-JUv" id="4ez-ZY-Sf5"/>
+                        <outlet property="move_bar_button" destination="Jbe-ji-4pJ" id="ohF-2A-Pr5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TB2-6e-9fx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
