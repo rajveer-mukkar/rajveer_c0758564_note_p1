@@ -24,6 +24,7 @@ class MoveFunctionViewController: UIViewController,UITableViewDelegate,UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "")
         cell.textLabel?.text = array_Folder.Folder_array[indexPath.row].name_of_folder
+        cell.backgroundColor = .lightGray
         return cell
     }
     

@@ -168,24 +168,37 @@ class FoldersPageTableViewController: UITableViewController {
         
     }
 func updateText (text :String){
-   if cur_Index != -1 && array != nil {
-
-array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes [cur_Index] = text
-    let indexPath = IndexPath(item: cur_Index , section : 0)
-    tableView.reloadRows(at: [indexPath], with: .none)
-    cur_Index = -1
+//   if cur_Index != -1 && array != nil {
+//
+//array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes[cur_Index] = text
+//    let indexPath = IndexPath(item: cur_Index , section : 0)
+//    tableView.reloadRows(at: [indexPath], with: .none)
+//    cur_Index = -1
+//
+//
+//    }
+//        else if array != nil && cur_Index == -1 {
+//           array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes.append(text)
+//
+//
+//
+//            tableView.reloadData()
+//     foldersdelegate?.reload()
+//    return
+//        }
     
-        
+    tableView.reloadData()
+    foldersdelegate?.reload()
+    guard  array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes != nil && cur_Index != -1  else {
+        array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes.append(text)
+        tableView.reloadData()
+        foldersdelegate?.reload()
+        return
     }
-        else if array != nil && cur_Index == -1 {
-           array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes.append(text)
     
-    
-   
-            tableView.reloadData()
-     foldersdelegate?.reload()
-    return
-        }
+     array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes[cur_Index] = text
+    let indexpath = IndexPath(item: cur_Index, section: 0)
+    tableView.reloadRows(at: [indexpath], with: .middle)
     }
     
     
