@@ -98,8 +98,23 @@ array = []
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
           tableView.cellForRow(at: indexPath)?.accessoryType = .detailButton
     }
-      
-//            override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    
+    @IBAction func ellispe_button(_ sender: UIBarButtonItem) {
+        if delete_bar_button.isEnabled == false && move_bar_button.isEnabled == false {
+            delete_bar_button.isEnabled = true
+            move_bar_button.isEnabled = true
+        } else if delete_bar_button.isEnabled == true && move_bar_button.isEnabled == true {
+            delete_bar_button.isEnabled = false
+            move_bar_button.isEnabled = false
+        }
+    }
+   func moveItem(atPath srcPath:String,
+                          toPath dstPath:String ) throws {
+    
+    }
+
+    //            override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //    tableView.deselectRow(at: indexPath, animated: true)
 //          let Cell = tableView.cellForRow(at: indexPath)
 //           let checkCell = array![indexPath.row]
