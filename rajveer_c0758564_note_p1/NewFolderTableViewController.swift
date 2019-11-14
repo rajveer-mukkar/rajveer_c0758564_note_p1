@@ -10,13 +10,11 @@ import UIKit
 
 class NewFolderTableViewController: UITableViewController {
     
-//    @IBOutlet weak var folderlabel: UILabel!
-    
-//    @IBOutlet weak var FolderIconImage: UIImageView!
+
     var fieldOfText:UITextField?
     var imageView : UIImage?
-    var array_folder : [String]?
-    
+   var text = ""
+    var cur_index = -1
    
     @IBOutlet var tableViewData: UITableView!
     
@@ -33,17 +31,25 @@ class NewFolderTableViewController: UITableViewController {
         okAction.setValue(UIColor.brown, forKey: "titleTextColor")
     let AddItemAction = UIAlertAction(title: "Add Item", style: .default)
     { (action) in
-            let txtField = alertcontroller.textFields![0]
-        
+        let name = alertcontroller.textFields?.first?.text
+            let folder_Name = array_Folder(name_of_folder: name, name_of_notes: [])
+        var flag = false
+        for h in array_Folder.Folder_array {
+            let any_name = folder_Name.name_of_folder
+            if name == h.name_of_folder {
+                flag = true
+                break
+            }
+        }
 
-        if self.array_folder!.contains(txtField.text!){
+       if flag {
                 let alertcontrolleragain = UIAlertController (title: "Name Taken", message: "Choose a Different File", preferredStyle: .alert)
                 let okAction2 = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                 alertcontrolleragain.addAction(okAction2)
                 self.present(alertcontrolleragain , animated: true , completion: nil)
                 
         } else {
-            self.array_folder!.append(txtField.text!)
+        array_Folder.Folder_array.append(folder_Name)
             
         }
 
@@ -57,6 +63,7 @@ class NewFolderTableViewController: UITableViewController {
         
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = editButtonItem
@@ -67,7 +74,7 @@ class NewFolderTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-                array_folder = []
+               
     }
 
     // MARK: - Table view data source
@@ -79,8 +86,9 @@ class NewFolderTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return array_folder?.count ?? 0
+        return array_Folder.Folder_array.count
     }
+    
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,9 +98,11 @@ class NewFolderTableViewController: UITableViewController {
 //           guard array_folder != nil else { return UITableViewCell() }
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "id"){
-                let folderName = array_folder![indexPath.row]
-               cell.textLabel?.text = folderName
+            let folderNameCell = array_Folder.Folder_array[indexPath.row].name_of_folder
+               cell.textLabel?.text = folderNameCell
         cell.imageView?.image = UIImage(named: "folder-icon")
+            cell.detailTextLabel?.text = "\(array_Folder.Folder_array[indexPath.row].name_of_notes.count)"
+            cell.detailTextLabel?.textColor = .white
                return cell
                                  
         }
@@ -113,7 +123,7 @@ class NewFolderTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            array_folder?.remove(at: indexPath.row)
+            array_Folder.Folder_array.remove(at: indexPath.row)
             tableViewData.reloadData()
             
             // Delete the row from the data source
@@ -129,6 +139,9 @@ class NewFolderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return tableViewData.isEditing ? .none : .delete
     }
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor.lightGray
+    }
 //
 //
 //    // Override to support rearranging the table view.
@@ -136,7 +149,9 @@ class NewFolderTableViewController: UITableViewController {
 //
 //    }
 //
-//
+      func reload(){
+    tableView.reloadData()
+}
 //
 //    // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -144,11 +159,13 @@ class NewFolderTableViewController: UITableViewController {
        return true
    }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item = array_folder?[sourceIndexPath.row]
-//        guard let item = array_folder?[sourceIndexPath.row] else { return array_folder }
-        array_folder?.remove(at: sourceIndexPath.row)
-        array_folder?.insert(item!, at: destinationIndexPath.row)
+//        let item = array_folder?[sourceIndexPath.row]
+////        guard let item = array_folder?[sourceIndexPath.row] else { return array_folder }
+//        array_folder?.remove(at: sourceIndexPath.row)
+//        array_folder?.insert(item!, at: destinationIndexPath.row)
     }
+
+    
 //
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRow(at: indexPath, animated: true)
@@ -161,7 +178,18 @@ class NewFolderTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        <#code#>
+//    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let my_view = segue.destination as? FoldersPageTableViewController {
+            my_view.foldersdelegate = self
+            if let cell = sender as? UITableViewCell {
+                if let my_index = tableView.indexPath(for: cell)?.row {
+                    cur_index = my_index
+                }
+            }
+        }
 //        if let detailView = segue.destination as? showNotesViewController {
 //                   if let tableViewcell = sender as? UITableViewCell {
 //                       detailView.array_folder = self

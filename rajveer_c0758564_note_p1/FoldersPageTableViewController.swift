@@ -9,10 +9,11 @@
 import UIKit
 
 class FoldersPageTableViewController: UITableViewController {
-var array : [String]?
+    var foldersdelegate : NewFolderTableViewController?
     var cur_Index = -1
-    
-    
+    var array : [String]?
+     var selectedrows : [IndexPath]?
+    var num_rows : [IndexPath]?
     @IBOutlet weak var delete_bar_button: UIBarButtonItem!
     
     @IBOutlet weak var move_bar_button: UIBarButtonItem!
@@ -26,7 +27,9 @@ var array : [String]?
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     // MARK: - Table view data source
-array = []
+//array = []
+        delete_bar_button.isEnabled = false
+        move_bar_button.isEnabled = false
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -34,28 +37,27 @@ array = []
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return array?.count ?? 0
+        return array_Folder.Folder_array[(foldersdelegate?.cur_index)!].name_of_notes.count
         // #warning Incomplete implementation, return the number of rows
        
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       if let item = array?[indexPath.row]
-       {
+      
 
         if  let cell = tableView.dequeueReusableCell(withIdentifier: "mynote") {
             if let label = cell.viewWithTag(1) as?
                 UILabel {
-                label.text = item
+                label.text = array_Folder.Folder_array[(foldersdelegate?.cur_index)!].name_of_notes[indexPath.row]
             }
             
             
         cell.backgroundColor = .lightGray
-        let arrayname = array![indexPath.row]
+        let arrayname = array_Folder.Folder_array[(foldersdelegate?.cur_index)!].name_of_notes[indexPath.row]
         cell.textLabel?.text = arrayname
         cell.accessoryType = .detailButton
 
         return cell
-    }
+    
     }
     return UITableViewCell()
 }
@@ -69,16 +71,18 @@ array = []
             if let rows_Selected = self.tableView.indexPathsForSelectedRows {
                 var item = [String]()
                 for index_path in rows_Selected {
-                    item.append(self.array![index_path.row])
-                }
-                for k in item {
-                    if let random_item = self.array!.firstIndex(of: k) {
-                        self.array!.remove(at: random_item)
+                    item.append(array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes[index_path.row])
+                        
+                    }
+                
+                
+                for i in item {
+                    if let random_item = array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes.index(of: i){
+                        array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes.remove(at: random_item)
                     }
                 }
-                self.tableView.beginUpdates()
                 self.tableView.deleteRows(at: rows_Selected, with: .automatic)
-                self.tableView.endUpdates()
+                self.tableView.reloadData()
             }
           
         }
@@ -134,8 +138,16 @@ array = []
         return cell
     }
     */
+   func notes_moved(index : Int){
+   selectedrows = tableView.indexPathsForSelectedRows!
    
+   for i in selectedrows!{
+       
+       let move = array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes[i.row]
+      array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes.append(move)
+   }
    
+    }
     
     // MARK: - Navigation
 
@@ -148,18 +160,17 @@ array = []
             
             if let tableViewcell = sender as? UITableViewCell {
                 if let index = tableView.indexPath(for: tableViewcell)?.row {
-                    detailView.textString = array![index]
+                    detailView.textString = array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes[index]
                     cur_Index = index
                 }
             }
         }
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
     }
 func updateText (text :String){
    if cur_Index != -1 && array != nil {
 
-array! [cur_Index] = text
+array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes [cur_Index] = text
     let indexPath = IndexPath(item: cur_Index , section : 0)
     tableView.reloadRows(at: [indexPath], with: .none)
     cur_Index = -1
@@ -167,10 +178,40 @@ array! [cur_Index] = text
         
     }
         else if array != nil && cur_Index == -1 {
-            array?.append(text)
+           array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes.append(text)
+    
+    
+   
             tableView.reloadData()
+     foldersdelegate?.reload()
+    return
         }
+    }
+    
+    
+    
+    
+    
+    
+    
+    func delete_rows() {
+        
+        selectedrows = tableView.indexPathsForSelectedRows!
+        var new = [String]()
+        for indexpath in selectedrows!{
+            new.append(array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes[indexpath.row])
+            
+        }
+        for n in new{
+            if let index = array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes.firstIndex(of: n)
+            {
+                array_Folder.Folder_array[(self.foldersdelegate?.cur_index)!].name_of_notes.remove(at: index)
+            }
+        }
+        tableView.reloadData()
+        foldersdelegate?.tableView.reloadData()
+    }
 
 }
 
-}
+

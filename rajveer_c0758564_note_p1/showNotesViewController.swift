@@ -9,9 +9,9 @@
 import UIKit
 
 class showNotesViewController: UIViewController {
-    var array : [String]?
+//    var array : [String]?
     
-   
+    weak var my_task_table : FoldersPageTableViewController?
     
     @IBOutlet weak var textview: UITextView!
    
@@ -26,7 +26,7 @@ class showNotesViewController: UIViewController {
 
         override func viewWillDisappear(_ animated: Bool) {
 
-                       taskTable?.updateText(text: textview.text)
+                      my_task_table?.updateText(text: textview.text)
 
 
     }
